@@ -3,7 +3,7 @@ import {
 } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { getAccessToken } from '../auth';
+import { getAccessToken } from '../utils/auth';
 
 const httpUrl = 'http://localhost:9000/graphql';
 const wsUrl = 'ws://localhost:9000/graphql';

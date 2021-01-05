@@ -1,5 +1,5 @@
 import React from 'react';
-import { useChatMessages } from './hooks';
+import { useChatMessages } from '../utils/hooks';
 import MessageInput from './MessageInput';
 import MessageList from './MessageList';
 
@@ -16,4 +16,4 @@ const Chat = ({user}) => {
   );
 };
 
-export default Chat;
+export default Chat

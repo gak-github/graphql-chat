@@ -1,27 +1,25 @@
-import React, { Component } from 'react';
-import { login } from './auth';
+import React, { useState } from 'react';
+import { login } from '../utils/auth';
 
-class Login extends Component {
-  state = {name: '', password: '', error: false};
-
-  handleChange(event) {
+const Login = ({onLogin}) => {
+  const [state, setState] = useState({ name: '', password: '', error: false });
+  const handleChange = (event) => {
     const {name, value} = event.target;
-    this.setState({[name]: value});
-  }
+    setState({...state, [name]: value});
+  };
 
-  async handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const {name, password} = this.state;
+    const {name, password} = state;
     const user = await login(name, password);
     if (user) {
-      this.props.onLogin(user);
+      onLogin(user);
     } else {
-      this.setState({error: true});
+      setState({...state, error: true});
     }
-  }
+  };
 
-  render() {
-    const {name, password, error} = this.state;
+  const {name, password, error} = state;
     return (
       <div>
         <section className="section">
@@ -32,14 +30,14 @@ class Login extends Component {
                 <label className="label">Name</label>
                 <div className="control">
                   <input className="input" type="text" name="name" value={name}
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={handleChange} />
                 </div>
               </div>
               <div className="field">
                 <label className="label">Password</label>
                 <div className="control">
                   <input className="input" type="password" name="password" value={password}
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={handleChange} />
                 </div>
               </div>
               <div className="field">
@@ -48,7 +46,7 @@ class Login extends Component {
                 }                
                 <div className="control">
                   <button className="button is-link"
-                    onClick={this.handleSubmit.bind(this)}>Login</button>
+                    onClick={handleSubmit}>Login</button>
                 </div>
               </div>
             </form>
@@ -56,7 +54,7 @@ class Login extends Component {
         </section>
       </div>
     );
-  }
-}
+
+};
 
 export default Login;
